@@ -1,3 +1,12 @@
+/**
+ * @description external api provied demo data for testing or populating the UI
+ * @name client
+ * @global
+ * @constant
+ *
+ *
+ */
+
 const client = contentful.createClient({
   space: "tzsry6lrietp",
   accessToken:
@@ -7,31 +16,151 @@ const client = contentful.createClient({
 // console.log(client);
 
 // variables
+/**
+ * @description  assigning div.cart-btn DOM to cartBtn object
+ * @name cartBtn
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const cartBtn = document.querySelector(".cart-btn");
+/**
+ * @description  assigning  div.close-cart DOM to closeCartBtn object
+ * @name closeCartBtn
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const closeCartBtn = document.querySelector(".close-cart");
+
+/**
+ * @description  assigning button.clear-cart DOM to clearBtn object
+ * @name clearBtn
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const clearBtn = document.querySelector(".clear-cart");
+
+/**
+ * @description  assigning div.cart DOM to cartDOM object
+ * @name cartDOM
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const cartDOM = document.querySelector(".cart");
+/**
+ * @description  assigning  div.overlay DOM to cartOverlay object
+ * @name cartOverlay
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const cartOverlay = document.querySelector(".cart-overlay");
+/**
+ * @description  assigning  div.cart-items html DOM element to cartItems object
+ * @name cartItems
+ * @constant
+ * @global
+ * @type {Object[]}
+ */
+
 const cartItems = document.querySelector(".cart-items");
+/**
+ * @description  assigning  span.cart-total html DOM element to cartTotal object
+ * @name cartTotal
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const cartTotal = document.querySelector(".cart-total");
+/**
+ * @description  assigning  div.cart-content html DOM element to cartContent object
+ * @name cartContent
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const cartContent = document.querySelector(".cart-content");
+/**
+ * @description  assigning  div.products-center html DOM element to productsDOM object
+ * @name productsDOM
+ * @constant
+ * @global
+ * @type {Object}
+ */
 const productsDOM = document.querySelector(".products-center");
-//cart
+/**
+ * @description array of {@link cartItem} objects represents products was added to cart
+ * @name cart
+ * @type {Array.<cartItem>}
+ *
+ */
 let cart = [];
-// buttons
+/**
+ * @description array of {@link buttons} objects represents buttons.btn-bag
+ *  - note  "those buttons created and populated into DOM using javascript"
+ * @name buttonsDOM
+ * @type {Array.<Object>}  DOM element "document.querySelectorAll(".bag-btn")"
+ *
+ */
 let buttonsDOM = [];
 // getting the products
+/**
+ * @description class responsible about fetching and destructuring items(products)
+ *  then  assigning them to an array of product object
+ * @class
+ * @name Products
+ * @example const products = new Products();
+ */
 class Products {
+  /**
+   * @description fetching and destructuring items(products)
+   *  then  assigning them to an array of product object
+   * @name getProducts
+   * @async
+   * @inner
+   * @public
+   * @function
+   * @returns [{Array.<Object>}] [array of product object]
+   * @example products.getProducts();
+   *
+   */
   async getProducts() {
+    /**
+     * @description surrounding the functinality of the function in try-catch block
+     *
+     */
     try {
+      /**
+       * @await
+       * @description asigning items to contentful object
+       * @name contentful
+       */
       let contentful = await client.getEntries({
         content_type: "comfyHouseFurrniture"
       });
-      // console.log(contentful);
-      let result = await fetch("products.json");
+      /**
+       * @description testing function
+       */
+      console.log(contentful);
+      let result = await fetch("../../products.json");
       let data = await result.json();
+      /**
+       * @description assigning to an array
+       * @name products
+       * @type {Array}
+       */
       let products = contentful.items;
       // console.log(contentful);
+      /**
+       * @description destructuring items from the array then reassign as
+       * @function
+       * @name map   array higher order function
+       * @param function
+       * @returns {Array.<Object>}
+       */
       products = products.map(item => {
         const { title, price } = item.fields;
         const { id } = item.sys;
@@ -91,7 +220,7 @@ class UI {
         event.target.disabled = true;
         //   get product  from products
         let cartItem = { ...Storage.getProducts(id), amount: 1 };
-        // console.log(cartItem);
+        console.log(cartItem);
         // add product from to the  cart
         cart = [...cart, cartItem];
         // console.log(cart);
@@ -216,30 +345,82 @@ class UI {
   }
 }
 
-// local storarge
+/**
+ * @description class cares about adding and removing product in and from the browser local storage
+ * contains main four functions
+ *                              1- function  {@link saveProducts} saves {@link products} into the browser local storage
+ *                              2- function  {@link getProducts} reads {@link products} from  the browser local storage
+ *                              3- function  {@link saveCart} saves {@link cart} item into the browser local storage
+ *                              4- function  {@link getCart} reads products from the browser local storage
+ * @name Storage
+ * @class
+ * @example  const strage = new Storage();
+ * @summary BROWSER LOCAL STORAGE   CREATING/READING OPERATIONS
+ */
+
 class Storage {
+  /**
+   * @description saving products in the browser localt storage takes products array as a parameter
+   * {@link products}
+   * @method
+   * @static
+   * @inner
+   * @name saveProducts
+   * @param {Array.<Object>}  pruducts to be saved
+   * @example Storage.saveProducts(products);
+   */
   static saveProducts(products) {
     localStorage.setItem("products", JSON.stringify(products));
   }
+  /**
+   * @description reading products from  the browser localt storage takes the id of product as a parameter
+   * and returns product matches that array
+   * @method
+   * @static
+   * @inner
+   * @name getProducts
+   * @param {number}  id of item to be fetched
+   * @example Storage.getProducts(1);
+   * @returns {Object}
+   */
   static getProducts(id) {
     let products = JSON.parse(localStorage.getItem("products"));
     return products.find(product => product.id === id);
   }
+  /**
+   * @description saving  cartItems array in  the browser local storage takes the {@link cart}  items array as a parameter
+   * @method
+   * @static
+   * @inner
+   * @name saveCart
+   * @param {Array<Object>}  cart items {@link cartItems} to be saved
+   * @example Storage.saveCart(cart)
+   */
   static saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
+  /**
+   * @description reading (fetching)  cartItems   array {@link cart} from  the browser local storage
+   * @method
+   * @static
+   * @inner
+   * @name getCart
+   * @param {Array<Object>}
+   * @returns {Array.<Object>}  cart
+   *  @example Storage.getCart()
+   */
   static getCart() {
     return localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
   // set up methods
   ui.setupApp();
-
   //   get all prooducts
   products
     .getProducts()

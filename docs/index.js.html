@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: index.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Products.html">Products</a></li><li><a href="Storage.html">Storage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#buttonsDOM">buttonsDOM</a></li><li><a href="global.html#cart">cart</a></li><li><a href="global.html#cartBtn">cartBtn</a></li><li><a href="global.html#cartContent">cartContent</a></li><li><a href="global.html#cartDOM">cartDOM</a></li><li><a href="global.html#cartItems">cartItems</a></li><li><a href="global.html#cartOverlay">cartOverlay</a></li><li><a href="global.html#cartTotal">cartTotal</a></li><li><a href="global.html#clearBtn">clearBtn</a></li><li><a href="global.html#client">client</a></li><li><a href="global.html#closeCartBtn">closeCartBtn</a></li><li><a href="global.html#contentful">contentful</a></li><li><a href="global.html">getCart</a></li><li><a href="global.html">getProducts</a></li><li><a href="global.html#maparrayhigherorderfunction">map   array higher order function</a></li><li><a href="global.html#products">products</a></li><li><a href="global.html#productsDOM">productsDOM</a></li><li><a href="global.html">saveCart</a></li><li><a href="global.html">saveProducts</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>index.js</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @description external api provied demo data for testing or populating the UI
+ * @name client
+ * @global
+ * @constant
+ *
+ *
+ */
+
+const client = contentful.createClient({
+  space: "tzsry6lrietp",
+  accessToken:
+    "45db9d587d237f603aa7bfddb35918bb377e6505f129200c9c1e07968be1c628",
+  host: "512063bb41145bfc98748478968f3fae74b98d9fa305d00c3920a669599985e0"
+});
+// console.log(client);
+
+// variables
+/**
+ * @description  assigning div.cart-btn DOM to cartBtn object
+ * @name cartBtn
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const cartBtn = document.querySelector(".cart-btn");
+/**
+ * @description  assigning  div.close-cart DOM to closeCartBtn object
+ * @name closeCartBtn
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const closeCartBtn = document.querySelector(".close-cart");
+
+/**
+ * @description  assigning button.clear-cart DOM to clearBtn object
+ * @name clearBtn
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const clearBtn = document.querySelector(".clear-cart");
+
+/**
+ * @description  assigning div.cart DOM to cartDOM object
+ * @name cartDOM
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const cartDOM = document.querySelector(".cart");
+/**
+ * @description  assigning  div.overlay DOM to cartOverlay object
+ * @name cartOverlay
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const cartOverlay = document.querySelector(".cart-overlay");
+/**
+ * @description  assigning  div.cart-items html DOM element to cartItems object
+ * @name cartItems
+ * @constant
+ * @global
+ * @type {Object[]}
+ */
+
+const cartItems = document.querySelector(".cart-items");
+/**
+ * @description  assigning  span.cart-total html DOM element to cartTotal object
+ * @name cartTotal
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const cartTotal = document.querySelector(".cart-total");
+/**
+ * @description  assigning  div.cart-content html DOM element to cartContent object
+ * @name cartContent
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const cartContent = document.querySelector(".cart-content");
+/**
+ * @description  assigning  div.products-center html DOM element to productsDOM object
+ * @name productsDOM
+ * @constant
+ * @global
+ * @type {Object}
+ */
+const productsDOM = document.querySelector(".products-center");
+/**
+ * @description array of {@link cartItem} objects represents products was added to cart
+ * @name cart
+ * @type {Array.&lt;cartItem>}
+ *
+ */
+let cart = [];
+/**
+ * @description array of {@link buttons} objects represents buttons.btn-bag
+ *  - note  "those buttons created and populated into DOM using javascript"
+ * @name buttonsDOM
+ * @type {Array.&lt;Object>}  DOM element "document.querySelectorAll(".bag-btn")"
+ *
+ */
+let buttonsDOM = [];
+// getting the products
+/**
+ * @description class responsible about fetching and destructuring items(products)
+ *  then  assigning them to an array of product object
+ * @class
+ * @name Products
+ * @example const products = new Products();
+ */
+class Products {
+  /**
+   * @description fetching and destructuring items(products)
+   *  then  assigning them to an array of product object
+   * @name getProducts
+   * @async
+   * @inner
+   * @public
+   * @function
+   * @returns [{Array.&lt;Object>}] [array of product object]
+   * @example products.getProducts();
+   *
+   */
+  async getProducts() {
+    /**
+     * @description surrounding the functinality of the function in try-catch block
+     *
+     */
+    try {
+      /**
+       * @await
+       * @description asigning items to contentful object
+       * @name contentful
+       */
+      let contentful = await client.getEntries({
+        content_type: "comfyHouseFurrniture"
+      });
+      /**
+       * @description testing function
+       */
+      console.log(contentful);
+      let result = await fetch("../../products.json");
+      let data = await result.json();
+      /**
+       * @description assigning to an array
+       * @name products
+       * @type {Array}
+       */
+      let products = contentful.items;
+      // console.log(contentful);
+      /**
+       * @description destructuring items from the array then reassign as
+       * @function
+       * @name map   array higher order function
+       * @param function
+       * @returns {Array.&lt;Object>}
+       */
+      products = products.map(item => {
+        const { title, price } = item.fields;
+        const { id } = item.sys;
+        const image = item.fields.image.fields.file.url;
+        return { title, price, id, image };
+      });
+
+      return products;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+// display products
+class UI {
+  displayProducts(products) {
+    let result = "";
+    products.forEach(product => {
+      result += `
+        &lt;!-- single product -->
+        &lt;article class="product">
+          &lt;div class="img-container">
+            &lt;img
+              src=${product.image}
+              class="product-img"
+              alt="img product"
+            />
+            &lt;button class="bag-btn" data-id=${product.id}>
+              &lt;i class="fas fa-shopping-cart">&lt;/i>
+              Add to bag
+            &lt;/button>
+          &lt;/div>
+          &lt;h3>${product.title}&lt;/h3>
+          &lt;h4>$${product.price} &lt;/h4>
+        &lt;/article>
+        &lt;!-- end of single product -->
+        `;
+    });
+
+    productsDOM.innerHTML = result;
+  }
+
+  getBagButtons() {
+    const buttons = [...document.querySelectorAll(".bag-btn")];
+    // buttonsDOM = buttons;
+    buttonsDOM = buttons;
+    buttons.forEach(button => {
+      let id = button.dataset.id;
+      let inCart = cart.find(item => item.id === id);
+      if (inCart) {
+        button.textContent = "In  Cart";
+        button.disabled = true;
+      }
+      button.addEventListener("click", event => {
+        event.target.textContent = "In  Cart";
+        event.target.disabled = true;
+        //   get product  from products
+        let cartItem = { ...Storage.getProducts(id), amount: 1 };
+        console.log(cartItem);
+        // add product from to the  cart
+        cart = [...cart, cartItem];
+        // console.log(cart);
+        // save product in the local storage
+        Storage.saveCart(cart);
+        //   set cart values
+        this.setCartValues(cart);
+        // display cart items
+        this.addCartItem(cartItem);
+        // show the cart
+        this.showCart();
+      });
+    });
+  }
+  setCartValues(cart) {
+    let tempTotal = 0;
+    let itemsTotal = 0;
+    cart.map(item => {
+      tempTotal += item.price * item.amount;
+      itemsTotal += item.amount;
+    });
+    cartTotal.textContent = parseFloat(tempTotal.toFixed(2));
+    cartItems.textContent = itemsTotal;
+  }
+
+  addCartItem(item) {
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+    &lt;img src=${item.image} alt="" />
+            &lt;div>
+              &lt;h4> ${item.title} &lt;/h4>
+              &lt;h5>$${item.price}&lt;/h5>
+              &lt;span class="remove-item" data-id=${item.id}>remove&lt;/span>
+            &lt;/div>
+            &lt;div>
+              &lt;i class="fas fa-chevron-up" data-id=${item.id}>&lt;/i>
+              &lt;p class="item-amount">${item.amount}&lt;/p>
+              &lt;i class="fas fa-chevron-down" data-id=${item.id}>&lt;/i>
+            &lt;/div>
+  
+  `;
+    cartContent.appendChild(div);
+    // console.log(cart);
+    // console.log(cartContent);
+  }
+  showCart() {
+    cartOverlay.classList.add("transparentBcg");
+    cartDOM.classList.add("showCart");
+  }
+
+  //   setup App
+  setupApp() {
+    cart = Storage.getCart();
+    this.setCartValues(cart);
+    this.populateCart(cart);
+    cartBtn.addEventListener("click", this.showCart);
+    closeCartBtn.addEventListener("click", this.hideCart);
+  }
+  populateCart(cart) {
+    cart.forEach(item => this.addCartItem(item));
+  }
+  hideCart() {
+    cartOverlay.classList.remove("transparentBcg");
+    cartDOM.classList.remove("showCart");
+  }
+  cartLogic() {
+    // clear cart button
+    clearBtn.addEventListener("click", () => {
+      this.clearCart();
+    });
+    // cart functionality
+    cartContent.addEventListener("click", () => {
+      if (event.target.classList.contains("remove-item")) {
+        let removeItem = event.target;
+        let id = removeItem.dataset.id;
+        cartContent.removeChild(removeItem.parentElement.parentElement);
+        this.removeItem(id);
+      } else if (event.target.classList.contains("fa-chevron-up")) {
+        let addAmount = event.target;
+        let id = addAmount.dataset.id;
+        // console.log(cart);
+        let tempItem = cart.find(item => item.id === id);
+        tempItem.amount = tempItem.amount + 1;
+        Storage.saveCart(cart);
+        this.setCartValues(cart);
+        addAmount.nextElementSibling.innerText = tempItem.amount;
+      } else if (event.target.classList.contains("fa-chevron-down")) {
+        let lowerAmount = event.target;
+        let id = lowerAmount.dataset.id;
+        // console.log(cart);
+        let tempItem = cart.find(item => item.id === id);
+        tempItem.amount = tempItem.amount - 1;
+        if (tempItem.amount > 0) {
+          Storage.saveCart(cart);
+          this.setCartValues(cart);
+          lowerAmount.previousElementSibling.innerText = tempItem.amount;
+        } else {
+          cartContent.removeChild(lowerAmount.parentElement.parentElement);
+          this.removeItem(id);
+        }
+      }
+    });
+  }
+  clearCart() {
+    let cartItems = cart.map(item => item.id);
+    cartItems.forEach(id => this.removeItem(id));
+    while (cartContent.children.length > 0) {
+      cartContent.removeChild(cartContent.children[0]);
+    }
+  }
+  removeItem(id) {
+    cart = cart.filter(item => item.id !== id);
+    this.setCartValues(cart);
+    Storage.saveCart(cart);
+    let button = this.getSingleButton(id);
+    button.disabled = false;
+    button.innerHTML = "&lt;i class='fas fa-shopping-cart'>&lt;/i> Add to cart";
+  }
+  getSingleButton(id) {
+    return buttonsDOM.find(button => button.dataset.id === id);
+  }
+}
+
+/**
+ * @description class cares about adding and removing product in and from the browser local storage
+ * contains main four functions
+ *                              1- function  {@link saveProducts} saves {@link products} into the browser local storage
+ *                              2- function  {@link getProducts} reads {@link products} from  the browser local storage
+ *                              3- function  {@link saveCart} saves {@link cart} item into the browser local storage
+ *                              4- function  {@link getCart} reads products from the browser local storage
+ * @name Storage
+ * @class
+ * @example  const strage = new Storage();
+ * @summary BROWSER LOCAL STORAGE   CREATING/READING OPERATIONS
+ */
+
+class Storage {
+  /**
+   * @description saving products in the browser localt storage takes products array as a parameter
+   * {@link products}
+   * @method
+   * @static
+   * @inner
+   * @name saveProducts
+   * @param {Array.&lt;Object>}  pruducts to be saved
+   * @example Storage.saveProducts(products);
+   */
+  static saveProducts(products) {
+    localStorage.setItem("products", JSON.stringify(products));
+  }
+  /**
+   * @description reading products from  the browser localt storage takes the id of product as a parameter
+   * and returns product matches that array
+   * @method
+   * @static
+   * @inner
+   * @name getProducts
+   * @param {number}  id of item to be fetched
+   * @example Storage.getProducts(1);
+   * @returns {Object}
+   */
+  static getProducts(id) {
+    let products = JSON.parse(localStorage.getItem("products"));
+    return products.find(product => product.id === id);
+  }
+  /**
+   * @description saving  cartItems array in  the browser local storage takes the {@link cart}  items array as a parameter
+   * @method
+   * @static
+   * @inner
+   * @name saveCart
+   * @param {Array&lt;Object>}  cart items {@link cartItems} to be saved
+   * @example Storage.saveCart(cart)
+   */
+  static saveCart(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  /**
+   * @description reading (fetching)  cartItems   array {@link cart} from  the browser local storage
+   * @method
+   * @static
+   * @inner
+   * @name getCart
+   * @param {Array&lt;Object>}
+   * @returns {Array.&lt;Object>}  cart
+   *  @example Storage.getCart()
+   */
+  static getCart() {
+    return localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const ui = new UI();
+  const products = new Products();
+  // set up methods
+  ui.setupApp();
+  //   get all prooducts
+  products
+    .getProducts()
+    .then(products => {
+      ui.displayProducts(products);
+      Storage.saveProducts(products);
+    })
+    .then(() => {
+      ui.getBagButtons();
+      ui.cartLogic();
+    });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Apr 29 2019 02:23:58 GMT+0300 (GMT+03:00)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
+        </p>
+    </div>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

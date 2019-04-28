@@ -31,7 +31,7 @@ body {
 }
 .navbar-center {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1170px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -54,10 +54,11 @@ body {
   border-radius: 30%;
   color: var(--mainWhite);
 }
+/* --------------- End of Navbar ---------------- */
 /* --------------- Hero ---------------- */
 .hero {
   min-height: calc(100vh - 60px);
-  background: url("./images/hero-bcg.jpeg") center/cover no-repeat;
+  background: url("../../src/images/hero-bcg.jpeg") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,7 +175,7 @@ body {
   transition: var(--mainTransition);
   background: rgb(240, 157, 81, 0.5);
   z-index: 2;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .cart {
   position: fixed;
@@ -187,7 +188,7 @@ body {
   background: rgb(231, 226, 221);
   padding: 1.5rem;
   transition: var(--mainTransition);
-  /* transform: translateX(100%); */
+  transform: translateX(100%);
 }
 .showCart {
   transform: translateX(0);
@@ -256,3 +257,4 @@ body {
   text-transform: capitalize;
   margin-bottom: 1rem;
 }
+

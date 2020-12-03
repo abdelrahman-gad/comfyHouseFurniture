@@ -7,12 +7,12 @@
  *
  */
 
-const client = contentful.createClient({
-  space: "tzsry6lrietp",
-  accessToken:
-    "45db9d587d237f603aa7bfddb35918bb377e6505f129200c9c1e07968be1c628",
-  host: "512063bb41145bfc98748478968f3fae74b98d9fa305d00c3920a669599985e0"
-});
+// const client = contentful.createClient({
+//   space: "tzsry6lrietp",
+//   accessToken:
+//     "45db9d587d237f603aa7bfddb35918bb377e6505f129200c9c1e07968be1c628",
+//   host: "512063bb41145bfc98748478968f3fae74b98d9fa305d00c3920a669599985e0"
+// });
 // console.log(client);
 
 // variables
@@ -115,6 +115,8 @@ let buttonsDOM = [];
  * @example const products = new Products();
  */
 class Products {
+
+
   /**
    * @description fetching and destructuring items(products)
    *  then  assigning them to an array of product object
@@ -139,36 +141,107 @@ class Products {
        * @description asigning items to contentful object
        * @name contentful
        */
-      let contentful = await client.getEntries({
-        content_type: "comfyHouseFurrniture"
-      });
+      // let contentful = await client.getEntries({
+      //   content_type: "comfyHouseFurrniture"
+      // });
       /**
        * @description testing function
        */
-      console.log(contentful);
-      let result = await fetch("../../products.json");
-      let data = await result.json();
+      //console.log(contentful);
+      // let result = await fetch("../../products.json");
+      // let data = await result.json();
+      
+      //  console.log(result);
       /**
        * @description assigning to an array
        * @name products
        * @type {Array}
        */
-      let products = contentful.items;
+      //let products = contentful.items;
       // console.log(contentful);
+     let products = [
+      {
+        sys: { id: "1" },
+        fields: {
+          title: "queen panel bed",
+          price: 10.99,
+          image: { fields: { file: { url: "./src/images/product-1.jpeg" } } }
+        }
+      },
+      {
+        sys: { id: "2" },
+        fields: {
+          title: "king panel bed",
+          price: 12.99,
+          image: { fields: { file: { url: "./src/images/product-2.jpeg" } } }
+        }
+      },
+      {
+        sys: { id: "3" },
+        fields: {
+          title: "single panel bed",
+          price: 12.99,
+          image: { fields: { file: { url: "./src/images/product-3.jpeg" } } }
+      }
+      },
+      {
+        sys: { id: "4" },
+        fields: {
+          title: "twin panel bed",
+          price: 22.99,
+          image: { fields: { file: { url: "./src/images/product-4.jpeg" } } }
+        }
+      },
+      {
+        sys: { id: "5" },
+        fields: {
+          title: "fridge",
+          price: 88.99,
+          image: { fields: { file: { url: "./src/images/product-5.jpeg" } } }
+        }
+      },
+      {
+        sys: { id: "6" },
+        fields: {
+          title: "dresser",
+          price: 32.99,
+          image: { fields: { file: { url: "./src/images/product-6.jpeg" } } }
+        }
+      },
+      {
+        sys: { id: "7" },
+        fields: {
+          title: "couch",
+          price: 45.99,
+          image: { fields: { file: { url: "./src/images/product-7.jpeg" } } }
+        }
+      },
+      {
+        sys: { id: "8" },
+        fields: {
+          title: "table",
+          price: 33.99,
+          image: { fields: { file: { url: "./src/images/product-8.jpeg" } } }
+        }
+      }  
+      ];
+
       /**
        * @description destructuring items from the array then reassign as
        * @function
        * @name map   array higher order function
        * @param function
        * @returns {Array.<Object>}
+       * 
        */
+      // products =JSON.parse(products); 
+      console.log(products);
       products = products.map(item => {
         const { title, price } = item.fields;
         const { id } = item.sys;
         const image = item.fields.image.fields.file.url;
         return { title, price, id, image };
       });
-
       return products;
     } catch (error) {
       console.log(error);
@@ -281,6 +354,7 @@ class UI {
       tempTotal += item.price * item.amount;
       itemsTotal += item.amount;
     });
+    // the content of .cart-totol element
     cartTotal.textContent = parseFloat(tempTotal.toFixed(2));
     cartItems.textContent = itemsTotal;
   }
@@ -310,8 +384,7 @@ class UI {
               <p class="item-amount">${item.amount}</p>
               <i class="fas fa-chevron-down" data-id=${item.id}></i>
             </div>
-  
-  `;
+            `;
     cartContent.appendChild(div);
     // console.log(cart);
     // console.log(cartContent);
@@ -559,6 +632,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
   // set up methods
+  console.log('from dom');
+
   ui.setupApp();
   //   get all prooducts
   products
